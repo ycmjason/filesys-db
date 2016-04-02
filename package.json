@@ -1,7 +1,7 @@
 {
   "name": "filesys-db",
   "version": "0.0.1",
-  "description": "A \"file system\" database which handles json files in higher level of abstraction.",
+  "description": "A file system database which handles json files in higher level of abstraction.",
   "main": "filesys-db.js",
   "scripts": {
     "pretest": "rm -r -f custom_db* filesys-db",
