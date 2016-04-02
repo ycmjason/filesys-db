@@ -1,0 +1,39 @@
+{
+  "name": "filesys-db",
+  "version": "0.0.1",
+  "description": "A \"file system\" database which handles json files in higher level of abstraction.",
+  "main": "filesys-db.js",
+  "scripts": {
+    "pretest": "rm -r -f custom_db* filesys-db",
+    "test": "mocha",
+    "jshint": "jshint filesys-db.js lib/*",
+    "jshint:test": "jshint test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ycmjason/filesys-db.git"
+  },
+  "keywords": [
+    "file",
+    "system",
+    "database",
+    "fsdb",
+    "filesys-db"
+  ],
+  "author": "Jason Yu <me@ycmjason.com> (ycmjason.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ycmjason/filesys-db/issues"
+  },
+  "homepage": "https://github.com/ycmjason/filesys-db#readme",
+  "dependencies": {
+    "lodash": "^4.7.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.1",
+    "mocha": "^2.4.5"
+  },
+  "jshintConfig": {
+    "esversion": 6
+  }
+}
