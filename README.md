@@ -1,3 +1,4 @@
+
 # File system database (filesys-db)
 filesys-db is a database system that manages your json files on your file system. This package is meant to be lightweight and intuitive to use. 
 
@@ -31,29 +32,19 @@ School (database)
 ## Usage
 
 ###  Overview
-This section is intended to demonstrate how to perform database operations with filesys-db. Here is the overview of steps.
-* [Creating data model](#creating-data-model)
+This section is intended to describe how to perform database operations with filesys-db.
+* Database (managing collections)
   * [Initialising **filesys-db**](#initialising-filesys-db)
-    * `var db = require('filesys-db')();`
   * [Creating **collections**](#creating-collections)
-    * `var cars = db.createCollection('collection');`
-  * [Inserting **documents**](#inserting-documents)
-    * `cars.put({model: 'KJ1', colour: 'red'}, callback);`
-    * `cars.put([bluecar, redcar], callback);`
-* [Manipulating data](#manipulating-data)
   * [Getting **collections**](#getting-collections)
-    * `var cars = db.get('cars');`
-  * [Finding **documents**](#finding-documents)
-    * `cars.find({colour: 'red'}, [callback]);`
-    * `cars.findOne({model: 'KJ1', colour: 'blue'}, [callback]);`
-  * [Updating **documents**](#updatingdocuments)
-    * `cars.update({model: 'KJ1'}, {colour: 'blue'}, callback);`
-  * [Removing **documents**](#removing-documents)
-    * `cars.remove({model: 'KJ1'}, callback);`
   * [Removing **collections**](#removing-collections)
-    * `db.dropCollection('cars');`
+* Collection (managing documents)
+  * [Inserting **documents**](#inserting-documents)
+  * [Finding **documents**](#finding-documents)
+  * [Updating **documents**](#updatingdocuments)
+  * [Removing **documents**](#removing-documents)
 
-### Creating data model
+### Database (managing collections)
 
 #### Initialising filesys-db
 * `require('filesys-db')([db_base_path]);`
@@ -65,16 +56,20 @@ This section is intended to demonstrate how to perform database operations with 
   * `collection_name` is unique to the database; meaning that no duplication would be allowed.  
   * synchronous method
 
+#### Getting collections
+* `db.getCollection(collection_name)`
+  * synchronous function
+  
+### Collection (managing documents)
+After reproducing the school-db data model, we could try querying, manipulating and removing the data.
+
 #### Inserting documents
 * `collection.put(document, [callback])`
   * document is only guaranteed to be inserted inside the callback function body.
   * **asynchronous method**
-  
-### Manipulating data
-After reproducing the school-db data model, we could try querying, manipulating and removing the data.
 
-#### Getting collections
-* `db.getCollection(collection_name)`
+#### Removing collections
+* `db.dropCollection(collection_name);`
   * synchronous function
 
 #### Finding documents
@@ -102,12 +97,8 @@ After reproducing the school-db data model, we could try querying, manipulating 
   * used lodash's [`_.filter`](https://lodash.com/docs#filter) function
   * **asynchronous function**
 
-#### Removing collections
-* `db.dropCollection(collection_name);`
-  * synchronous function
-
-#### School database example
-The [above example](#data-store) can be quickly reproduced with filesys-db:
+## School database example
+The [school database example](#data-store) can be quickly reproduced with filesys-db:
 
 We can use the nodejs interactive shell for this.
 ```
@@ -118,7 +109,7 @@ bash> node
 ```
 >in this example, we store our json files in `./school-db/`.
 
-The database is now initialised. Let's prepare the collections.
+The database is now initialised. Let's create the collections.
 ```js
 > var students = db.createCollection('students');
 > var classrooms = db.createCollection('classrooms');
@@ -130,7 +121,7 @@ Let's insert some students data into the students collection.
 ...   students.put({"name": "Margaret", "age": 18});
 ... });
 ```
->Note: we **should not** execute the two `put` without a call back. Collections operations are 
+>Note: we **should not** execute the two `put` without any of them nested in other's call back. Collections operations are asynchronous.
 
 To avoid *callback hell*, we could actually put multiple documents into a collection all at once.
 ```js
@@ -139,8 +130,9 @@ To avoid *callback hell*, we could actually put multiple documents into a collec
                   {"room_number": "308", "capacity": 32},                  
                   {"room_number": "B3", "capacity": 40}]);
 ```
-
-Before actual manipulation, we have to obtain the reference to the collections. It is actually very simple with just few lines of code:
+---
+Now we have everything set. The principle of the school ordered us to change something on the database. 
+However before any change, we have to obtain the reference to the collections. It is actually very simple with just few lines of code:
 ```js
 // connects to school-db
 var db = require('filesys-db')('./school-db/');
@@ -195,10 +187,17 @@ classrooms.update(function(classroom){
 })
 ```
 
-Margaret has pissed Jason off one day and Jason has decided to hack into the school-db and delete Margaret from the database. He ran the following command to do so.
+Margaret has pissed Jason off one day and Jason has decided to hack into the school-db and delete Margaret from the database. He ran the following scripts to do so.
 ```js
 students.remove({name: 'Margaret'}, function(){
   console.log("no more margaret!");
 });
 ```
 
+## Testing
+```bash
+npm run test
+```
+
+## license
+MIT
