@@ -1,4 +1,5 @@
 
+
 # File system database (filesys-db)
 filesys-db is a database system that manages your json files on your file system. This package is meant to be lightweight and intuitive to use. 
 
@@ -29,7 +30,7 @@ School (database)
 ``` 
 ## Usage examples
 ### Reproduce the school database
-The above example can be quickly reproduced using filesys-db:
+The [above example](#data-store) can be quickly reproduced using filesys-db:
 
 First we get into node interactive shell by:
 ```
