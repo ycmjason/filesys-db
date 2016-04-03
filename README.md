@@ -1,5 +1,3 @@
-
-
 # File system database (filesys-db)
 filesys-db is a database system that manages your json files on your file system. This package is meant to be lightweight and intuitive to use. 
 
@@ -29,10 +27,12 @@ School (database)
  |   |-- {"room_number": "308", "capacity": 32} (document)   
  |   |-- {"room_number": "B3", "capacity": 40} (document)
 ``` 
+
 ## Usage
+
 ###  Overview
 This section is intended to demonstrate how to perform database operations with filesys-db. Here is the overview of steps.
-1. [Creating data model](#creating-data-model)
+* [Creating data model](#creating-data-model)
   * [Initialising **filesys-db**](#initialising-filesys-db)
     * `var db = require('filesys-db')();`
   * [Creating **collections**](#creating-collections)
@@ -40,7 +40,7 @@ This section is intended to demonstrate how to perform database operations with 
   * [Inserting **documents**](#inserting-documents)
     * `cars.put({model: 'KJ1', colour: 'red'}, callback);`
     * `cars.put([bluecar, redcar], callback);`
-2. [Manipulating data](#manipulating-data)
+* [Manipulating data](#manipulating-data)
   * [Getting **collections**](#getting-collections)
     * `var cars = db.get('cars');`
   * [Finding **documents**](#finding-documents)
@@ -54,10 +54,12 @@ This section is intended to demonstrate how to perform database operations with 
     * `db.dropCollection('cars');`
 
 ### Creating data model
+
 #### Initialising filesys-db
 * `require('filesys-db')([db_base_path]);`
   * `db_base_path` by default is `'./filesys-db/'`
   * synchronous method
+
 ##### School database example
 The [above example](#data-store) can be quickly reproduced with filesys-db:
 
@@ -69,16 +71,19 @@ bash> node
 > var db = require('filesys-db')('./school-db/');
 ```
 >in this example, we store our json files in `./school-db/`.
+
 #### Creating collections
 * `db.createCollection(collection_name);`
   * `collection_name` is unique to the database; meaning that no duplication would be allowed.  
   * synchronous method
+
 ##### School database example
 The database is now initialised. Let's prepare the collections.
 ```js
 > var students = db.createCollection('students');
 > var classrooms = db.createCollection('classrooms');
 ```
+
 #### Inserting documents
 * `collection.put(document, [callback])`
   * document is only guaranteed to be inserted inside the callback function body.
@@ -100,11 +105,14 @@ To avoid *callback hell*, we could actually put multiple documents into a collec
                   {"room_number": "308", "capacity": 32},                  
                   {"room_number": "B3", "capacity": 40}]);
 ```
+
 ### Manipulating data
 After reproducing the school-db data model, we could try querying, manipulating and removing the data.
+
 #### Getting collections
 * `db.getCollection(collection_name)`
   * synchronous function
+
 ##### School database example
 Before actual manipulation, we have to obtain the reference to the collections. It is actually very simple with just few lines of code:
 ```js
@@ -114,6 +122,7 @@ var db = require('filesys-db')('./school-db/');
 var students   = db.getCollection('students');
 var classrooms = db.getCollection('classrooms');
 ```
+
 #### Finding documents
 * `collection.find(query, [callback]);`
   * `query` can be of type (`Array`|`Function`|`Object`|`string`)
@@ -123,6 +132,7 @@ var classrooms = db.getCollection('classrooms');
   * `query` can be of type (`Array`|`Function`|`Object`|`string`)
   * used lodash's [`_.find`](https://lodash.com/docs#find) function
   * synchronous function (recommend to use callback)
+
 ##### School database example
 Now let's say we want to find the classrooms that have capacity >= 40 and the room has exactly capacity=40.
 ```js
@@ -147,6 +157,7 @@ students.findOne({name: "Margaret"}, function(margaret){
 });
 // Result: 18
 ```
+
 #### Updating documents
 * `collection.update(query, update, [callback]);`
   * `query`|`update` can be of type (`Array`|`Function`|`Object`|`string`)
@@ -155,6 +166,7 @@ students.findOne({name: "Margaret"}, function(margaret){
   * if `update` is a function, each queried document will be passed into update and update should have it's property updated.
   * final documents will be passed to the `callback`
   * **asynchronous method**
+
 ##### School database example
 The school is reconstructed and all rooms have their capacity increased by 20%. Let's see how are we going to reflect this on filesys-db.
 ```js
@@ -183,6 +195,7 @@ classrooms.update(function(classroom){
   * `query` can be of type (`Array`|`Function`|`Object`|`string`)
   * used lodash's [`_.filter`](https://lodash.com/docs#filter) function
   * **asynchronous function**
+
 ##### School database example
 Margaret has pissed Jason off one day and Jason has decided to hack into the school-db and delete Margaret from the database. He ran the following command to do so.
 ```js
@@ -190,6 +203,7 @@ students.remove({name: 'Margaret'}, function(){
   console.log("no more margaret!");
 });
 ```
+
 #### Removing collections
 * `db.dropCollection(collection_name);`
   * synchronous function
