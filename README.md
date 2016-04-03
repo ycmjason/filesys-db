@@ -3,7 +3,9 @@
 filesys-db is a database system that manages your json files on your file system. This package is meant to be lightweight and intuitive to use. 
 
 ## Installation
-  npm install --save filesys-db
+```
+npm install --save filesys-db
+```
 
 ## Data store
 Data are stored as json files under the database base path, which can be easily configured. filesys-db is heavily influenced by MongoDB and used terms like documents, collections and databases. Below is a table explaining what they are, you should be quite familiar with them if you had experience in MongoDB.
