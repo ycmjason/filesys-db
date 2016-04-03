@@ -1,3 +1,4 @@
+"use strict";
 var fs = require('fs');
 var Database = require('./lib/Database');
 
