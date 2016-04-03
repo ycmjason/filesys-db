@@ -199,5 +199,10 @@ students.remove({name: 'Margaret'}, function(){
 npm run test
 ```
 
-## license
+## To do ideas
+* binary that interacts with database
+  * e.g. `fsdb collection ls` -> `collection1`, `collection2`, `collection3`...
+* refactor tests
+
+## License
 MIT
