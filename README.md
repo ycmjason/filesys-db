@@ -15,16 +15,16 @@ Collection  | Table            | Collection groups a number of documents of usua
 Database    | Database         | Database groups a number of Collection.
 
 A simple example that would illustrate their relations well.
-
-  School (database)
-   |-- Students (collection)
-   |   |-- {"name": "Jason", "age": 21} (document)
-   |   |-- {"name": "Margaret", "age": 18} (document)
-   |-- Classrooms (collection)
-   |   |-- {"room_number": "A3", "capacity": 40} (document)
-   |   |-- {"room_number": "e03", "capacity": 100} (document)   
-   |   |-- {"room_number": "308", "capacity": 32} (document)   
-  
+```
+School (database)
+ |-- Students (collection)
+ |   |-- {"name": "Jason", "age": 21} (document)
+ |   |-- {"name": "Margaret", "age": 18} (document)
+ |-- Classrooms (collection)
+ |   |-- {"room_number": "A3", "capacity": 40} (document)
+ |   |-- {"room_number": "e03", "capacity": 100} (document)   
+ |   |-- {"room_number": "308", "capacity": 32} (document)   
+``` 
 ## Usage examples
 ### Reproduce the school database
 The above example can be quickly reproduced using filesys-db:
