@@ -9,7 +9,7 @@ filesys-db is a database system that manages your json files on your file system
 Data are stored as json files under the database base path, which can be easily configured. filesys-db is heavily influenced by MongoDB and used terms like documents, collections and databases. Below is a table explaining what they are, you should be quite familiar with them if you had experience in MongoDB.
 
 Term        | RDBMS equivilent | Description
-------------|------------------|------
+------------|------------------|-----------------------------------------------------------------------
 Document    | Record           | Document is a list of datum.
 Collection  | Table            | Collection groups a number of documents of usually the same type.
 Database    | Database         | Database groups a number of Collection.
