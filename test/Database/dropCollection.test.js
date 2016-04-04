@@ -19,7 +19,7 @@ module.exports = function(){
     };
 
     before(function(){
-      db=DB();
+      db=DB.clearInstances();
     });
 
     it('should create a collection then drop it', function(){

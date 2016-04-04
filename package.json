@@ -1,6 +1,6 @@
 {
   "name": "filesys-db",
-  "version": "v0.0.5",
+  "version": "v0.1.0",
   "description": "A file system database which handles json files in higher level of abstraction.",
   "main": "filesys-db.js",
   "scripts": {
@@ -18,7 +18,8 @@
     "system",
     "database",
     "fsdb",
-    "filesys-db"
+    "filesys-db",
+    "filesysdb"
   ],
   "author": "Jason Yu <me@ycmjason.com> (ycmjason.com)",
   "license": "MIT",
@@ -34,6 +35,7 @@
     "mocha": "^2.4.5"
   },
   "jshintConfig": {
-    "esversion": 6
+    "esversion": 6,
+    "node": true
   }
 }

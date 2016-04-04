@@ -29,6 +29,20 @@ module.exports = function(){
       });
     });
 
+    describe('singleton database tests', function(){
+      it('should two db test always return same instance', function(){
+        assert(DB()==DB());
+      });
+      it('should multiple always return same instance', function(){
+        var dbs = [];
+        dbs.push(DB('custom_db'));
+        dbs.push(DB('custom_db'));
+        dbs.push(DB('custom_db'));
+        dbs.push(DB('custom_db'));
+        assert(dbs.reduce((dis, dat) => (dis==dat)?dis:false));
+      });
+    });
+
 
     after(function(){
       var created_dirs = ['./filesys-db', './custom_db', './custom_db2'];

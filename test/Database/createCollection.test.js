@@ -6,7 +6,7 @@ module.exports = function(checkCollection){
   describe('#createCollection', function(){
     var db;
     before(function(){
-      db=DB();
+      db=DB.clearInstances();;
     });
 
     it('should create a cars collection in db, with correct properties and .json at fs', function(){

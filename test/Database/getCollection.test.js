@@ -6,7 +6,7 @@ module.exports = function(checkCollection){
   describe('#getCollection', function(){
     var db;
     before(function(){
-      db=DB();
+      db=DB.clearInstances();
     });
 
     it('should create a collection then try getting it', function(){

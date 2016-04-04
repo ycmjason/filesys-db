@@ -7,7 +7,7 @@ module.exports = function(){
   describe('#update', function(){
     var db;
     beforeEach(function(done){
-      db = DB();
+      db = DB.clearInstances();
       var cars = db.createCollection('cars');
       var dummy_cars = [{model: 'N444', color: 'rainbow'},
         {model: 'N392', color: 'blue'},
@@ -29,7 +29,7 @@ module.exports = function(){
       var collection = db.getCollection('cars');
       collection.update({model: 'N444'}, {color: 'black', price: '$2039'}, function(newcars){
         assert.deepEqual(newcars[0], {model: 'N444', color: 'black', price: '$2039'});
-        var db2 = DB();
+        var db2 = DB.clearInstances();
         assert.deepEqual(db2.getCollection('cars').findOne({model: 'N444'}),
                          {model: 'N444', color: 'black', price: '$2039'});
                          done();
@@ -44,7 +44,7 @@ module.exports = function(){
                            {model: 'N293', color: 'black', price: '$2039'},
                            {model: 'N000', color: 'black', price: '$2039'}]
                         );
-        var db2 = DB();
+        var db2 = DB.clearInstances();
         assert.deepEqual(db2.getCollection('cars').findOne({model: 'N444'}),
                          {model: 'N444', color: 'black', price: '$2039'});
                          done();
@@ -58,7 +58,7 @@ module.exports = function(){
         assert.deepEqual(newcars, [{model: 'N444', color: 'rainbow0'},
                                    {model: 'N293', color: 'rainbow0'},
                                    {model: 'N000', color: 'rainbow0'}]);
-        var db2 = DB();
+        var db2 = DB.clearInstances();
         assert.deepEqual(db2.getCollection('cars').findOne({model: 'N444'}),
                          {model: 'N444', color: 'rainbow0'});
                          done();
