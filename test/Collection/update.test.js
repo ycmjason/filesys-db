@@ -65,6 +65,17 @@ module.exports = function(){
       });
     });
 
+    it('should not perform upsert', function(done){
+      db.getCollection('cars').update({model: '123'}, {color: 'red'}, function(cars){
+        assert.equal(cars.length, 0);
+        db.getCollection('cars').findOne({model: '123'}, function(car){
+          assert.equal(car, null);
+          done();
+        });
+      });
+
+    });
+
     afterEach(function(){
       db.dropCollection('cars');
     });
