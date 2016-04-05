@@ -49,11 +49,13 @@ This section is intended to describe how to perform database operations with fil
 #### Initialising filesys-db
 * `require('filesys-db')([db_name]);`
   * `db_name` by default is `'filesys-db'`
+  * this essentially creates a directory at `./node_modules/filesys-db/[db_name]/`
   * synchronous method
 
 #### Creating collections
 * `db.createCollection(collection_name);`
   * `collection_name` is unique to the database; meaning that no duplication would be allowed.  
+  * this essentially creates a json file at `./node_modules/filesys-db/[db_name]/`
   * synchronous method
 
 #### Getting collections
