@@ -1,8 +1,9 @@
 var assert = require('assert');
 var fs = require('fs');
 var DB = require('../../filesys-db');
+var checkCollection = require('../Collection/checkCollection');
 
-module.exports = function(checkCollection){
+module.exports = function(){
   describe('#createCollection', function(){
     var db;
     before(function(){

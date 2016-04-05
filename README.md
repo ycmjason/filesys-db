@@ -8,7 +8,7 @@ npm install --save filesys-db
 ```
 
 ## Data store
-Data are stored as json files under the database base path, which can be easily configured. filesys-db is heavily influenced by MongoDB and used terms like documents, collections and databases. Below is a table explaining what they are, you should be quite familiar with them if you had experience in MongoDB.
+Data are stored as json files under the database base path, `node_modules/filesys-db/[database name]/`, which can be easily configured. filesys-db is heavily influenced by MongoDB and used terms like documents, collections and databases. Below is a table explaining what they are, you should be quite familiar with them if you had experience in MongoDB.
 
 Term        | RDBMS equivilent | Description
 ------------|------------------|-----------------------------------------------------------------------
@@ -47,8 +47,8 @@ This section is intended to describe how to perform database operations with fil
 ### Database (managing collections)
 
 #### Initialising filesys-db
-* `require('filesys-db')([db_base_path]);`
-  * `db_base_path` by default is `'./filesys-db/'`
+* `require('filesys-db')([db_name]);`
+  * `db_name` by default is `'filesys-db'`
   * synchronous method
 
 #### Creating collections
@@ -105,9 +105,9 @@ We can use the nodejs interactive shell for this.
 bash> node
 ```
 ```js
-> var db = require('filesys-db')('./school-db/');
+> var db = require('filesys-db')('school-db');
 ```
->in this example, we store our json files in `./school-db/`.
+>in this example, we store our json files at `./node_modules/filesys-db/school-db/`.
 
 The database is now initialised. Let's create the collections.
 ```js
@@ -135,7 +135,7 @@ Now we have everything set. The principle of the school ordered us to change som
 However before any change, we have to obtain the reference to the collections. It is actually very simple with just few lines of code:
 ```js
 // connects to school-db
-var db = require('filesys-db')('./school-db/');
+var db = require('filesys-db')('school-db');
 // get the references to students and classrooms collections
 var students   = db.getCollection('students');
 var classrooms = db.getCollection('classrooms');
