@@ -61,6 +61,10 @@ This section is intended to describe how to perform database operations with fil
 #### Getting collections
 * `db.getCollection(collection_name)`
   * synchronous function
+
+#### Removing collections
+* `db.dropCollection(collection_name);`
+  * synchronous function
   
 ### Collection (managing documents)
 After reproducing the school-db data model, we could try querying, manipulating and removing the data.
@@ -68,20 +72,19 @@ After reproducing the school-db data model, we could try querying, manipulating 
 #### Inserting documents
 * `collection.put(document, [callback])`
   * document is only guaranteed to be inserted inside the callback function body.
+  * nothing is passed to the `callback`.
   * **asynchronous method**
-
-#### Removing collections
-* `db.dropCollection(collection_name);`
-  * synchronous function
 
 #### Finding documents
 * `collection.find(query, [callback]);`
   * `query` can be of type (`Array`|`Function`|`Object`|`string`)
   * used lodash's [`_.filter`](https://lodash.com/docs#filter) function
+  * Array of documents matching query will be passed to the `callback`
   * synchronous function (recommend to use callback)
 * `collection.findOne(query, callback);`
   * `query` can be of type (`Array`|`Function`|`Object`|`string`)
   * used lodash's [`_.find`](https://lodash.com/docs#find) function
+  * First document which matches the query will be passed to the `callback`
   * synchronous function (recommend to use callback)
 
 #### Updating documents
@@ -90,13 +93,14 @@ After reproducing the school-db data model, we could try querying, manipulating 
   * used lodash's [`_.filter`](https://lodash.com/docs#filter) function
   * queried documents will inherits `update`'s properties if update is an object
   * if `update` is a function, each queried document will be passed into update and update should have it's property updated.
-  * final documents will be passed to the `callback`
+  * the documents updated will be passed to the `callback`
   * **asynchronous method**
 
 #### Removing documents
 * `collection.remove(query, [callback]);`
   * `query` can be of type (`Array`|`Function`|`Object`|`string`)
   * used lodash's [`_.filter`](https://lodash.com/docs#filter) function
+  * removed documents will be passed to the `callback`
   * **asynchronous function**
 
 ## School database example
@@ -191,8 +195,9 @@ classrooms.update(function(classroom){
 
 Margaret has pissed Jason off one day and Jason has decided to hack into the school-db and delete Margaret from the database. He ran the following scripts to do so.
 ```js
-students.remove({name: 'Margaret'}, function(){
-  console.log("no more margaret!");
+students.remove({name: 'Margaret'}, function(students){
+  var margaret = students[0];
+  console.log("she is gone at the age of " + margaret.age + ".");
 });
 ```
 
